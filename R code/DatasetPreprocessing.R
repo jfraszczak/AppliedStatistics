@@ -73,10 +73,13 @@ fillMissingData<-function(dataset){
 }
 
 selectSignificatFeatures<-function(dataset, include_country){
-  features <- c('Air_passengers', 'Compensation_of_employees', 'Hours_worked', 
-    'Life_expectancy', 'GDP',
-    '%_of_people_studying_or_training', 'Students','GVA',
-    '%_of_NEET', 'First_wave_density', 'Second_wave_density')
+  features <- c(
+    'First_wave_density', 'Second_wave_density',
+    'Life_expectancy', 'Population_density', 'GVA',
+    '%_of_people_studying_or_training', '%_of_NEET', '%_early_leavers_from_education',
+    'Hospital_beds', 'Farm_labour_force', 'Utilised_agricoltural_area',
+    'Hours_worked', 'Unemployement_rate'
+    )
   
   if(include_country){
     features <- append(features, 'Country')

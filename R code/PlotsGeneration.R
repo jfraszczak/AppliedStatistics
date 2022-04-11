@@ -61,14 +61,14 @@ plotAllFeautresAgainstCases<-function(dataset, directory_plots, subdirectory){
     title <- paste(feature, " - First Wave.png", sep="")
     title <- str_replace_all(title, "%", "percent")
     file_path= file.path(subdirectory_path, title)
-    png(height=1800, width=1800, file=file_path, type = "cairo")
+    png(file=file_path, type = "cairo")
     plotSingleFeautreAgainstCases(x, y1, group, feature, 1)
     dev.off()
     
     title <- paste(feature, " - Second Wave.png", sep="")
     title <- str_replace_all(title, "%", "percent")
     file_path= file.path(subdirectory_path, title)
-    png(height=1800, width=1800, file=file_path, type = "cairo")
+    png(file=file_path, type = "cairo")
     plotSingleFeautreAgainstCases(x, y2, group, feature, 2)
     dev.off()
     
@@ -124,7 +124,7 @@ plotAllBivariateFeautresAgainstCases<-function(dataset, directory_plots, subdire
       title <- paste(title, " - First Wave.png", sep="")
       title <- str_replace_all(title, "%", "percent")
       file_path= file.path(subdirectory_path, title)
-      png(height=1800, width=1800, file=file_path, type = "cairo")
+      png(file=file_path, type = "cairo")
       plotBivariateFeautresAgainstCases(x1, x2, y1, feature1, feature2, 1)
       dev.off()
       
@@ -132,7 +132,7 @@ plotAllBivariateFeautresAgainstCases<-function(dataset, directory_plots, subdire
       title <- paste(title, " - Second Wave.png", sep="")
       title <- str_replace_all(title, "%", "percent")
       file_path= file.path(subdirectory_path, title)
-      png(height=1800, width=1800, file=file_path, type = "cairo")
+      png(file=file_path, type = "cairo")
       plotBivariateFeautresAgainstCases(x1, x2, y2, feature1, feature2, 2)
       dev.off()
 
@@ -154,7 +154,7 @@ plotBoxplotsGroupedByCountries<-function(dataset, directory_plots, subdirectory)
     title <- str_replace_all(title, "%", "percent")
     file_path= file.path(subdirectory_path, title)
     print(file_path)
-    png(height=1800, width=1800, file=file_path, type = "cairo")
+    png(file=file_path, type = "cairo")
     
     boxplot(dataset[,feature] ~ group,
             xlab='Country', 
@@ -170,7 +170,7 @@ plotCorrelationMtrix<-function(dataset, directory_plots, title){
   ds <- dataset_complete[ , nums]
   
   file_path= file.path(directory_plots, title)
-  png(height=1800, width=1800, file=file_path, type = "cairo")
+  png(file=file_path, type = "cairo")
   corrplot(cor(ds))
   dev.off()
 }
