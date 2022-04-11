@@ -1,9 +1,11 @@
 initialize<-function(directory_path, directory_plots){
   rm(list = ls())
   setwd(directory_path)
+  unlink(directory_plots, recursive = TRUE)
   dir.create(directory_plots, showWarnings = FALSE)
   source("DatasetPreprocessing.R")
   source("PlotsGeneration.R")
+  source("PrepareDataset.R")
 }
 
 #Initialization
@@ -14,9 +16,10 @@ initialize(directory_path, directory_plots)
 #Data preprocessing
 dataset_name <- 'dataset.csv'
 dataset<-loadDataset(dataset_name)
-dataset <- scale_and_filter_dataset(dataset)
+dataset <- prepareDataset(dataset)
 dataset_complete <- fillMissingData(dataset)
 dataset_quantitative <- selectQuantitativeFeatures(dataset_complete)
+write.csv(dataset,"DatasetPreprocessed.csv", row.names = FALSE)
 
 #Plot correlation matrix and PCA
 plotCorrelationMtrix(dataset_complete, directory_plots, "Correlation matrix.png")

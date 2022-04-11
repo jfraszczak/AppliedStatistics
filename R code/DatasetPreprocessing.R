@@ -55,15 +55,15 @@ fillMissingData<-function(dataset){
   countries<-unique(dataset$country)
   for(country in countries){
     for(feature in features){
-      values<-dataset[dataset$country == country, feature]
+      values<-dataset[dataset$Country == country, feature]
       if(all(is.na(values))){
-        dataset_complete[dataset_complete$country == country, feature] <- mean(dataset_complete[,feature], na.rm = TRUE) 
+        dataset_complete[dataset_complete$Country == country, feature] <- mean(dataset_complete[,feature], na.rm = TRUE) 
       }
     }
   }
   
   dataset_complete <- dataset_complete %>% 
-    group_by(country) %>% 
+    group_by(Country) %>% 
     mutate_if(is.numeric, 
               function(x) ifelse(is.na(x), 
                                  median(x, na.rm = TRUE), 
@@ -72,14 +72,14 @@ fillMissingData<-function(dataset){
   dataset_complete
 }
 
-selectSignificatFeatures<-function(dataset,include_country){
-  features <- c('air_passengers', 'total_compensation_of_employees_x10^6', 'sum_of_hours_worked_x1000', 
-    'life_expectancy', 'longterm_beds_scaled_on_100k','gdp_x10^6',
-    '%_of_people_studying_or_training', 'students','GVA_in_%',
-    'NEET_%', 'cases_by_population_first_wave', 'cases_by_population_second_wave')
+selectSignificatFeatures<-function(dataset, include_country){
+  features <- c('Air_passengers', 'Compensation_of_employees', 'Hours_worked', 
+    'Life_expectancy', 'GDP',
+    '%_of_people_studying_or_training', 'Students','GVA',
+    '%_of_NEET', 'First_wave_density', 'Second_wave_density')
   
   if(include_country){
-    features <- append(features, 'country')
+    features <- append(features, 'Country')
   }
   
   dataset<-dataset[, features]

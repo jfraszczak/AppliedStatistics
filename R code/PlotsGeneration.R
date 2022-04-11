@@ -48,9 +48,9 @@ plotSingleFeautreAgainstCases<-function(x, y, group, feature, wave){
 
 plotAllFeautresAgainstCases<-function(dataset, directory_plots, subdirectory){
   features<-names(dataset_quantitative)
-  group <- dataset[,"country"]
-  y1 <- dataset[,'cases_by_population_first_wave']
-  y2 <- dataset[,'cases_by_population_second_wave']
+  group <- dataset[,"Country"]
+  y1 <- dataset[,'First_wave_density']
+  y2 <- dataset[,'Second_wave_density']
   
   subdirectory_path = file.path(directory_plots, subdirectory)
   dir.create(subdirectory_path, showWarnings = FALSE)
@@ -103,11 +103,11 @@ plotBivariateFeautresAgainstCases<-function(x1, x2, y, feature1, feature2, wave)
 
 plotAllBivariateFeautresAgainstCases<-function(dataset, directory_plots, subdirectory){
   features<-names(dataset_quantitative)
-  features<-features[features != 'cases_by_population_first_wave']
-  features<-features[features != 'cases_by_population_second_wave']
-  group <- dataset[,"country"]
-  y1 <- dataset[,'cases_by_population_first_wave']
-  y2 <- dataset[,'cases_by_population_second_wave']
+  features<-features[features != 'First_wave_density']
+  features<-features[features != 'Second_wave_density']
+  group <- dataset[,"Country"]
+  y1 <- dataset[,'First_wave_density']
+  y2 <- dataset[,'Second_wave_density']
   
   subdirectory_path = file.path(directory_plots, subdirectory)
   dir.create(subdirectory_path, showWarnings = FALSE)
@@ -144,7 +144,7 @@ plotAllBivariateFeautresAgainstCases<-function(dataset, directory_plots, subdire
 plotBoxplotsGroupedByCountries<-function(dataset, directory_plots, subdirectory){
   dataset_quantitative <- selectQuantitativeFeatures(dataset)
   features<-names(dataset_quantitative)
-  group <- dataset[,"country"]
+  group <- dataset[,"Country"]
   
   subdirectory_path = file.path(directory_plots, subdirectory)
   dir.create(subdirectory_path, showWarnings = FALSE)
@@ -184,6 +184,6 @@ performPCA<-function(dataset, directory_plots, title1, title2){
   ggsave(file_path)
   
   file_path = file.path(directory_plots, title2)
-  ggbiplot(dataset_quantitative.pca,ellipse=TRUE, groups=dataset$country)
+  ggbiplot(dataset_quantitative.pca,ellipse=TRUE, groups=dataset$Country)
   ggsave(file_path)
 }
